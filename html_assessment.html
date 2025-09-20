@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Proficiency Self-Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .question h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .options {
+            margin: 15px 0;
+        }
+        
+        .option {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option input[type="radio"], .option input[type="checkbox"] {
+            transform: scale(1.2);
+            accent-color: #3498db;
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .option label:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border: 1px solid #4a5568;
+        }
+        
+        .score-section {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        
+        .beginner { background: #ffebee; color: #c62828; border: 2px solid #c62828; }
+        .intermediate { background: #fff3e0; color: #ef6c00; border: 2px solid #ef6c00; }
+        .advanced { background: #e8f5e8; color: #2e7d32; border: 2px solid #2e7d32; }
+        .expert { background: #e3f2fd; color: #1565c0; border: 2px solid #1565c0; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HTML Proficiency Assessment</h1>
+            <p>Comprehensive evaluation for experienced developers</p>
+        </div>
+        
+        <div class="content">
+            <form id="assessmentForm">
+                <!-- Section 1: HTML Fundamentals -->
+                <div class="section">
+                    <h2><span class="section-icon">1</span>HTML Fundamentals & Document Structure</h2>
+                    
+                    <div class="question">
+                        <h3>1. Which DOCTYPE declaration is correct for HTML5?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q1" value="a" id="q1a">
+                                <label for="q1a">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" value="b" id="q1b">
+                                <label for="q1b">&lt;!DOCTYPE html&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" value="c" id="q1c">
+                                <label for="q1c">&lt;!DOCTYPE HTML5&gt;</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>2. What is the purpose of the &lt;meta charset="UTF-8"&gt; tag?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q2" value="a" id="q2a">
+                                <label for="q2a">Sets the page title</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" value="b" id="q2b">
+                                <label for="q2b">Specifies character encoding for the document</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" value="c" id="q2c">
+                                <label for="q2c">Links external stylesheets</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Semantic HTML -->
+                <div class="section">
+                    <h2><span class="section-icon">2</span>Semantic HTML & Accessibility</h2>
+                    
+                    <div class="question">
+                        <h3>3. Which elements are considered landmark elements? (Select all that apply)</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="checkbox" name="q3" value="header" id="q3a">
+                                <label for="q3a">&lt;header&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" name="q3" value="nav" id="q3b">
+                                <label for="q3b">&lt;nav&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" name="q3" value="main" id="q3c">
+                                <label for="q3c">&lt;main&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" name="q3" value="div" id="q3d">
+                                <label for="q3d">&lt;div&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" name="q3" value="aside" id="q3e">
+                                <label for="q3e">&lt;aside&gt;</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>4. What's the difference between &lt;section&gt; and &lt;article&gt;?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q4" value="a" id="q4a">
+                                <label for="q4a">No difference, they're interchangeable</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" value="b" id="q4b">
+                                <label for="q4b">&lt;article&gt; is for standalone content, &lt;section&gt; groups related content</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" value="c" id="q4c">
+                                <label for="q4c">&lt;section&gt; is for standalone content, &lt;article&gt; groups related content</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Forms & Input -->
+                <div class="section">
+                    <h2><span class="section-icon">3</span>Forms & Advanced Input Types</h2>
+                    
+                    <div class="question">
+                        <h3>5. Which HTML5 input type provides a date picker?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q5" value="a" id="q5a">
+                                <label for="q5a">type="datetime"</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" value="b" id="q5b">
+                                <label for="q5b">type="date"</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" value="c" id="q5c">
+                                <label for="q5c">type="calendar"</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>6. What does the 'required' attribute do in form validation?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q6" value="a" id="q6a">
+                                <label for="q6a">Makes the field bold</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q6" value="b" id="q6b">
+                                <label for="q6b">Prevents form submission if field is empty</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q6" value="c" id="q6c">
+                                <label for="q6c">Adds a red border to the field</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Advanced HTML -->
+                <div class="section">
+                    <h2><span class="section-icon">4</span>Advanced HTML Features</h2>
+                    
+                    <div class="question">
+                        <h3>7. What is the purpose of the 'data-*' attributes?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q7" value="a" id="q7a">
+                                <label for="q7a">To store custom data for CSS styling</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q7" value="b" id="q7b">
+                                <label for="q7b">To store custom data private to the page or application</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q7" value="c" id="q7c">
+                                <label for="q7c">To validate form data</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>8. Which element is used for creating a dropdown list?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q8" value="a" id="q8a">
+                                <label for="q8a">&lt;dropdown&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q8" value="b" id="q8b">
+                                <label for="q8b">&lt;select&gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q8" value="c" id="q8c">
+                                <label for="q8c">&lt;list&gt;</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Multimedia & Graphics -->
+                <div class="section">
+                    <h2><span class="section-icon">5</span>Multimedia & Graphics</h2>
+                    
+                    <div class="question">
+                        <h3>9. What's the difference between &lt;img&gt; and &lt;picture&gt; elements?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q9" value="a" id="q9a">
+                                <label for="q9a">No difference</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q9" value="b" id="q9b">
+                                <label for="q9b">&lt;picture&gt; allows responsive images with multiple sources</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q9" value="c" id="q9c">
+                                <label for="q9c">&lt;picture&gt; is for animated images only</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>10. Which attribute makes an image accessible to screen readers?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q10" value="a" id="q10a">
+                                <label for="q10a">title</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q10" value="b" id="q10b">
+                                <label for="q10b">alt</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q10" value="c" id="q10c">
+                                <label for="q10c">description</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Performance & Best Practices -->
+                <div class="section">
+                    <h2><span class="section-icon">6</span>Performance & Best Practices</h2>
+                    
+                    <div class="question">
+                        <h3>11. What does the 'defer' attribute do in a script tag?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q11" value="a" id="q11a">
+                                <label for="q11a">Delays script execution until HTML parsing is complete</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q11" value="b" id="q11b">
+                                <label for="q11b">Executes script immediately</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q11" value="c" id="q11c">
+                                <label for="q11c">Prevents script from executing</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>12. Which link relationship improves performance by preloading resources?</h3>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q12" value="a" id="q12a">
+                                <label for="q12a">rel="preload"</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q12" value="b" id="q12b">
+                                <label for="q12b">rel="prefetch"</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q12" value="c" id="q12c">
+                                <label for="q12c">Both a and b</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-section">
+                    <button type="button" class="btn" onclick="calculateScore()">Calculate My Score</button>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div id="result" class="result"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'b',
+            q3: ['header', 'nav', 'main', 'aside'],
+            q4: 'b',
+            q5: 'b',
+            q6: 'b',
+            q7: 'b',
+            q8: 'b',
+            q9: 'b',
+            q10: 'b',
+            q11: 'a',
+            q12: 'c'
+        };
+
+        function calculateScore() {
+            let score = 0;
+            let totalQuestions = 12;
+            
+            // Check single-choice questions
+            const singleChoiceQuestions = ['q1', 'q2', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12'];
+            
+            singleChoiceQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === correctAnswers[q]) {
+                    score += 1;
+                }
+            });
+            
+            // Check multiple-choice question (q3)
+            const q3Checked = Array.from(document.querySelectorAll('input[name="q3"]:checked')).map(input => input.value);
+            const q3Correct = correctAnswers.q3;
+            
+            if (q3Checked.length === q3Correct.length && q3Checked.every(val => q3Correct.includes(val))) {
+                score += 1;
+            }
+            
+            const percentage = Math.round((score / totalQuestions) * 100);
+            
+            // Update progress bar
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            
+            // Show result
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let level, feedback;
+            
+            if (percentage >= 90) {
+                level = 'Expert';
+                feedback = 'Outstanding! You have mastery-level HTML knowledge. You understand advanced concepts, best practices, and modern HTML standards.';
+                resultDiv.className = 'result expert';
+            } else if (percentage >= 75) {
+                level = 'Advanced';
+                feedback = 'Excellent! You have strong HTML skills with good understanding of semantic markup, accessibility, and modern features.';
+                resultDiv.className = 'result advanced';
+            } else if (percentage >= 60) {
+                level = 'Intermediate';
+                feedback = 'Good foundation! You understand core HTML concepts but could benefit from studying semantic HTML, accessibility, and performance optimization.';
+                resultDiv.className = 'result intermediate';
+            } else {
+                level = 'Beginner';
+                feedback = 'Keep learning! Focus on HTML fundamentals, document structure, and semantic markup to build a stronger foundation.';
+                resultDiv.className = 'result beginner';
+            }
+            
+            resultDiv.innerHTML = `
+                <h3>Your HTML Proficiency Level: ${level}</h3>
+                <p>Score: ${score}/${totalQuestions} (${percentage}%)</p>
+                <p style="margin-top: 15px; font-weight: normal;">${feedback}</p>
+                <div style="margin-top: 20px; font-weight: normal; text-align: left;">
+                    <strong>Areas to focus on:</strong><br>
+                    ${getRecommendations(score, percentage)}
+                </div>
+            `;
+        }
+        
+        function getRecommendations(score, percentage) {
+            const recommendations = [];
+            
+            if (percentage < 90) {
+                recommendations.push("• Review HTML5 semantic elements and their proper usage");
+            }
+            if (percentage < 80) {
+                recommendations.push("• Study web accessibility (WCAG) guidelines and ARIA attributes");
+                recommendations.push("• Learn about modern form validation and input types");
+            }
+            if (percentage < 70) {
+                recommendations.push("• Practice with responsive images and picture element");
+                recommendations.push("• Understand script loading strategies (defer, async)");
+            }
+            if (percentage < 60) {
+                recommendations.push("• Master HTML document structure and meta tags");
+                recommendations.push("• Learn about performance optimization techniques");
+            }
+            
+            return recommendations.length > 0 ? recommendations.join('<br>') : "• Continue exploring cutting-edge HTML features and web standards";
+        }
+    </script>
+</body>
+</html>
